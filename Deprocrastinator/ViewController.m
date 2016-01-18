@@ -57,6 +57,9 @@
 
 }
 - (IBAction)onEditButtonPressed:(UIBarButtonItem *)sender {
+    if (self.navigationItem.leftBarButtonItem) {
+        <#statements#>
+    }
     [self.tableView setEditing:YES animated:YES];
     
 }
