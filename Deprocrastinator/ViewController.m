@@ -36,7 +36,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.textLabel.backgroundColor = [UIColor greenColor];
+    cell.textLabel.textColor = [UIColor greenColor];
 }
 
 - (IBAction)onAddButtonPressed:(UIBarButtonItem *)sender
