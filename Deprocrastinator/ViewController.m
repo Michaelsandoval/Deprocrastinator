@@ -33,6 +33,12 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.backgroundColor = [UIColor greenColor];
+}
+
 - (IBAction)onAddButtonPressed:(UIBarButtonItem *)sender
 {
     [self.thingsToDo addObject:self.toDoTextField.text];
