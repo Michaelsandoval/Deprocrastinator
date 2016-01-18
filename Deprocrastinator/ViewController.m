@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  self.thingsToDo = [NSMutableArray new];
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
 
 }
 
@@ -38,6 +40,13 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.textLabel.textColor = [UIColor greenColor];
 }
+-(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.thingsToDo removeObjectAtIndex:indexPath.row];
+        [self.tableView reloadData];
+    }
+}
 
 - (IBAction)onAddButtonPressed:(UIBarButtonItem *)sender
 {
@@ -47,5 +56,10 @@
     [self.toDoTextField resignFirstResponder];
 
 }
+- (IBAction)onEditButtonPressed:(UIBarButtonItem *)sender {
+    [self.tableView setEditing:YES animated:YES];
+    
+}
+
 
 @end
