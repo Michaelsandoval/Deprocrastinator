@@ -10,6 +10,7 @@
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *toDoTextField;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray *thingsToDo;
 @end
 
@@ -17,25 +18,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- self.thingsToDo = [NSMutableArray arrayWithObjects:@"", nil];
+ self.thingsToDo = [NSMutableArray new];
 
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return (self.thingsToDo.count - 1);
+    return self.thingsToDo.count;
 }
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [self.thingsToDo objectAtIndex:indexPath.row + 1]];
+    cell.textLabel.text =  [self.thingsToDo objectAtIndex:indexPath.row];
     return cell;
 }
 
 - (IBAction)onAddButtonPressed:(UIBarButtonItem *)sender
 {
-    self.thingsToDo = [NSMutableArray arrayWithObjects:@"", nil];
     [self.thingsToDo addObject:self.toDoTextField.text];
+    [self.tableView reloadData];
+    self.toDoTextField.text = @"";
+    [self.toDoTextField resignFirstResponder];
 
 }
 
