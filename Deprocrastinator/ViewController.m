@@ -23,18 +23,20 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return (self.thingsToDo.count - 1);
 }
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [self.thingsToDo objectAtIndex:indexPath.row + 1]];
+    return cell;
 }
 
 - (IBAction)onAddButtonPressed:(UIBarButtonItem *)sender
 {
-    self.thingsToDo = [NSMutableArray arrayWithObjects: nil];
+    self.thingsToDo = [NSMutableArray arrayWithObjects:@"", nil];
+    [self.thingsToDo addObject:self.toDoTextField.text];
 
-    [self.toDoTextField.text] =
 }
 
 @end
