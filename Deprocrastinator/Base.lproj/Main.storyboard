@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,14 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W3t-3W-9Hl">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W3t-3W-9Hl">
                                 <rect key="frame" x="0.0" y="64" width="600" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HKC-HT-xN7">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HKC-HT-xN7">
                                 <rect key="frame" x="0.0" y="102" width="600" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellID" id="fNG-C0-9H1">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
@@ -38,13 +40,24 @@
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="Qc0-46-SmD"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Jyu-Os-LeX"/>
+                                    <outletCollection property="gestureRecognizers" destination="uiE-Os-0Rm" appends="YES" id="YFd-nT-CHu"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="HKC-HT-xN7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="5Gy-2c-xlj"/>
+                            <constraint firstItem="HKC-HT-xN7" firstAttribute="top" secondItem="W3t-3W-9Hl" secondAttribute="bottom" constant="8" id="BDA-Sc-2Hl"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="HKC-HT-xN7" secondAttribute="bottom" id="WnJ-Fi-WUX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HKC-HT-xN7" secondAttribute="trailing" constant="-20" id="mpu-hb-aBw"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="uiE-Os-0Rm" appends="YES" id="vJC-zA-mW6"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="F82-Oe-unX">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="974-xQ-0bd">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="974-xQ-0bd">
                             <connections>
                                 <action selector="onEditButtonPressed:" destination="BYZ-38-t0r" id="hMX-0B-kVH"/>
                             </connections>
@@ -56,11 +69,18 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editBarButton" destination="974-xQ-0bd" id="Orq-lA-vC0"/>
                         <outlet property="tableView" destination="HKC-HT-xN7" id="Xcp-ye-3hH"/>
                         <outlet property="toDoTextField" destination="W3t-3W-9Hl" id="FyK-q5-SiG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="uiE-Os-0Rm">
+                    <connections>
+                        <action selector="swipeRight:" destination="BYZ-38-t0r" id="H7v-gf-7jb"/>
+                        <outlet property="delegate" destination="HKC-HT-xN7" id="Scj-Il-y1y"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1057" y="337"/>
         </scene>

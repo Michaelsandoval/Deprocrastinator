@@ -8,26 +8,26 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface ViewController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *toDoTextField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray *thingsToDo;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editBarButton;
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
- self.thingsToDo = [NSMutableArray new];
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    
-
+    self.thingsToDo = [NSMutableArray new];
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.thingsToDo.count;
 }
+
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
@@ -40,12 +40,11 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.textLabel.textColor = [UIColor greenColor];
 }
+
 -(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.thingsToDo removeObjectAtIndex:indexPath.row];
         [self.tableView reloadData];
-    }
 }
 
 - (IBAction)onAddButtonPressed:(UIBarButtonItem *)sender
@@ -56,12 +55,29 @@
     [self.toDoTextField resignFirstResponder];
 
 }
-- (IBAction)onEditButtonPressed:(UIBarButtonItem *)sender {
-    if (self.navigationItem.leftBarButtonItem) {
-        <#statements#>
+- (IBAction)onEditButtonPressed:(UIBarButtonItem *)sender
+{
+    if ([sender.title isEqualToString:@"Edit"])
+    {
+        sender.title = [NSString stringWithFormat:@"Done"];
+        [self.tableView setEditing:YES animated:YES];
     }
-    [self.tableView setEditing:YES animated:YES];
-    
+    else
+    {
+        sender.title = [NSString stringWithFormat:@"Edit"];
+        [self.tableView setEditing:NO animated:NO];
+    }
+}
+
+- (IBAction)swipeRight:(UISwipeGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateEnded)
+    {
+        CGPoint swipeLocation = [sender locationInView:self.tableView];
+        NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
+        UITableViewCell* swipedCell = [self.tableView cellForRowAtIndexPath:swipedIndexPath];
+        swipedCell.textLabel.textColor = [UIColor redColor];
+    }
 }
 
 
