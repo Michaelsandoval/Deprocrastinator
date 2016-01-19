@@ -46,6 +46,9 @@
         [self.thingsToDo removeObjectAtIndex:indexPath.row];
         [self.tableView reloadData];
 }
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+    [self.tableView exchangeSubviewAtIndex:fromIndexPath.row withSubviewAtIndex:toIndexPath.row];
+}
 
 - (IBAction)onAddButtonPressed:(UIBarButtonItem *)sender
 {
