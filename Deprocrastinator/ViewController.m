@@ -76,7 +76,26 @@
         CGPoint swipeLocation = [sender locationInView:self.tableView];
         NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
         UITableViewCell* swipedCell = [self.tableView cellForRowAtIndexPath:swipedIndexPath];
-        swipedCell.textLabel.textColor = [UIColor redColor];
+        
+        if ((swipedCell.textLabel.textColor == [UIColor redColor]))
+        {
+            swipedCell.textLabel.textColor = [UIColor yellowColor];
+        }
+        else if ((swipedCell.textLabel.textColor == [UIColor yellowColor]))
+        {
+            swipedCell.textLabel.textColor = [UIColor greenColor];
+        }
+        else if ((swipedCell.textLabel.textColor == [UIColor greenColor]))
+        {
+            swipedCell.textLabel.textColor = [UIColor blackColor];
+        }
+        else
+        {
+            swipedCell.textLabel.textColor = [UIColor redColor];
+        }
+
+
+
     }
 }
 
